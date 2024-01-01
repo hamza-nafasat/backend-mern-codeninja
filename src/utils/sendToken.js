@@ -1,12 +1,16 @@
 const sendToken = (res, user, message = "", statusCode = 200) => {
 	const token = user.getJwtToken();
+
 	const options = {
-		maxAge: 15 * 24 * 60 * 60 * 1000,
+		maxAge: 15 * 24 * 60 * 60,
 		httpOnly: true,
-		secure: true,
-		sameSite: "none",
+		secure: process.env.NODE_ENV === "production",
+		sameSite: "lax",
+		domain: process.env.DOMAIN_NAME,
+		path: "/",
 	};
-	res.status(statusCode).cookie("token", token, options).json({
+	res.status(statusCode).cookie("token", token, options);
+	res.json({
 		success: true,
 		message,
 		user,
