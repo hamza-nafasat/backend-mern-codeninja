@@ -107,7 +107,7 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
 //  LOGOUT
 export const logout = asyncHandler(async (req, res, next) => {
 	const options = {
-		maxAge: 0,
+		maxAge: 1,
 		httpOnly: true,
 		secure: process.env.NODE_ENV === "production",
 		sameSite: "none",
