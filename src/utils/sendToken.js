@@ -5,9 +5,7 @@ const sendToken = (res, user, message = "", statusCode = 200) => {
 		maxAge: 15 * 24 * 60 * 60,
 		httpOnly: true,
 		secure: process.env.NODE_ENV === "production",
-		sameSite: "lax",
-		domain: process.env.DOMAIN_NAME,
-		path: "/",
+		sameSite: "none",
 	};
 	res.status(statusCode).cookie("token", token, options);
 	res.json({
