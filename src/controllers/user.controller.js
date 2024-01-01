@@ -107,14 +107,12 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
 //  LOGOUT
 export const logout = asyncHandler(async (req, res, next) => {
 	const options = {
-		maxAge: 1,
+		maxAge: 0,
 		httpOnly: true,
 		secure: process.env.NODE_ENV === "production",
 		sameSite: "none",
 	};
-
-	res.cookie("token", null, options);
-	res.status(200).json({
+	res.status(200).cookie("token", "", options).json({
 		success: true,
 		message: "Logged out Successfully",
 	});
