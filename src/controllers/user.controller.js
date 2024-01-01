@@ -109,11 +109,11 @@ export const logout = asyncHandler(async (req, res, next) => {
 	const options = {
 		expires: new Date(0),
 		httpOnly: true,
-		secure: req.secure || req.headers["x-forwarded-proto"] === "https",
+		secure: process.env.NODE_ENV === "production",
 		sameSite: "none",
 	};
-
-	res.status(200).clearCookie("token", options).json({
+	res.clearCookie("token", options);
+	res.status(200).json({
 		success: true,
 		message: "Logged out Successfully",
 	});
