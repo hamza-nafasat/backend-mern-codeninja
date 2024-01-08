@@ -1,10 +1,30 @@
 import express from "express";
 import singleUpload from "../middlewares/multer.js";
 import { isAdmin, isAuthenticated } from "../middlewares/auth.js";
-import { getAllUsers, getAllCourses, updateUserRole, deleteUser } from "../controllers/user.controller.js";
-import { logout, getMyProfile, deleteMyProfile, updateProfile } from "../controllers/user.controller.js";
-import { register, login, forgetPassword, resetPassword, changePasssword } from "../controllers/user.controller.js";
-import { addToPlayList, removeFromPlayList, updateProfilePicture } from "../controllers/user.controller.js";
+import {
+	getAllUsers,
+	getAllCourses,
+	updateUserRole,
+	deleteUser,
+} from "../controllers/user.controller.js";
+import {
+	logout,
+	getMyProfile,
+	deleteMyProfile,
+	updateProfile,
+} from "../controllers/user.controller.js";
+import {
+	register,
+	login,
+	forgetPassword,
+	resetPassword,
+	changePasssword,
+} from "../controllers/user.controller.js";
+import {
+	addToPlayList,
+	removeFromPlayList,
+	updateProfilePicture,
+} from "../controllers/user.controller.js";
 
 const router = express.Router();
 
@@ -25,7 +45,7 @@ router.route("/resetpassword/:token").put(resetPassword);
 //// ===============================
 
 // LOGOUT
-router.route("/logout").get(isAuthenticated, logout);
+router.route("/logout").post(isAuthenticated, logout);
 
 // GET PROFILE && DELETE PROFILE
 router.route("/myprofile").get(isAuthenticated, getMyProfile).delete(isAuthenticated, deleteMyProfile);

@@ -5,6 +5,7 @@ const sendToken = (res, user, message = "", statusCode = 200) => {
 		httpOnly: true,
 		secure: process.env.NODE_ENV === "production",
 		sameSite: "none",
+		path: "/",
 	};
 	res.cookie("token", token, options);
 	res.status(statusCode).json({

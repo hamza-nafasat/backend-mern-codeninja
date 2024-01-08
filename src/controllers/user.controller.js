@@ -54,8 +54,7 @@ export const login = asyncHandler(async (req, res, next) => {
 export const forgetPassword = asyncHandler(async (req, res, next) => {
 	const { email } = req.body;
 	const user = await User.findOne({ email });
-	if (!user)
-		return next(new CustomError("User not found. Please check your email address.", 404));
+	if (!user) return next(new CustomError("User not found. Please check your email address.", 404));
 	////
 	const resetToken = await user.getResetToken();
 	await user.save();
@@ -113,7 +112,7 @@ export const logout = asyncHandler(async (req, res, next) => {
 		sameSite: "none",
 		path: "/",
 	};
-	res.clearCookie("token", options);
+	res.cookie("token", null, options);
 	res.status(200).json({
 		success: true,
 		message: "Logged out Successfully",

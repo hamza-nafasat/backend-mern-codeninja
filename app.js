@@ -41,7 +41,7 @@ app.use(API_PREFIX_V1, paymentRoutes);
 app.get("/", (req, res) =>
 	res.send(
 		`<h2>
-			Site is working. Click <a href=${process.env.FRONTEND_URL}>here</a> to check the application.
+			Site is working <a href=${process.env.FRONTEND_URL}>here</a>.
 		</h2>`
 	)
 );
